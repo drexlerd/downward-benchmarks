@@ -1,5 +1,5 @@
 (define (domain settlers)
-(:requirements :action-costs :typing :negative-preconditions :conditional-effects)
+(:requirements :action-costs :typing :negative-preconditions :conditional-effects :equality)
 (:types
     store stone_level ore_level timber_level coal_level wood_level iron_level resource space_level housing_level - object
     place vehicle - store

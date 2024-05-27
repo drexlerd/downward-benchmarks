@@ -6,7 +6,7 @@
 ;; parameters from three to only two.
 
 (define (domain genome-edit-distance)
-(:requirements :equality :action-costs)
+(:requirements :equality :action-costs :negative-preconditions)
   (:predicates
    ;; Static predicate, identifies duplicate copies of genes.
    ;; The "duplicate" relation is symmetric; "swappable" is an
@@ -371,60 +371,60 @@
   ;;  :vars (?x)
   ;;  :set-constraint (exactly-n 1 (normal ?x) (inverted ?x))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name cw-next
   ;;  :vars (?x)
   ;;  :set-constraint (at-most-n 1 (setof :vars (?y) (cw ?x ?y)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name cw-prev
   ;;  :vars (?x)
   ;;  :set-constraint (at-most-n 1 (setof :vars (?y) (cw ?y ?x)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name x-s-first
   ;;  :set-constraint (at-most-n 1 (setof :vars (?x) (s-first ?x)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name x-s-next
   ;;  :vars (?x)
   ;;  :set-constraint (at-most-n 1 (setof :vars (?y) (s-next ?x ?y)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name x-s-last
   ;;  :set-constraint (at-most-n 1 (setof :vars (?x) (s-last ?x)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name x-last-cut
   ;;  :set-constraint (at-most-n 1 (idle) (setof :vars (?x) (last-cut-point ?x)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name x-cut-point-1
   ;;  :set-constraint (at-most-n 1 (setof :vars (?x) (cut-point-1 ?x)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name x-cut-point-2
   ;;  :set-constraint (at-most-n 1 (setof :vars (?x) (cut-point-2 ?x)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name x-splice-point-1
   ;;  :set-constraint (at-most-n 1 (setof :vars (?x) (splice-point-1 ?x)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name x-splice-point-2
   ;;  :set-constraint (at-most-n 1 (setof :vars (?x) (splice-point-2 ?x)))
   ;;  )
-  ;; 
+  ;;
   ;; (:invariant
   ;;  :name control2
   ;;  :set-constraint (exactly-n 1 (idle) (cutting) (have-cut)

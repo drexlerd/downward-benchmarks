@@ -25,8 +25,8 @@
       :precondition (committed ?res ?as)
       :effect (and (not (committed ?res ?as))
 		   (available ?res)))
-		
-		
+
+
    (:action assemble
       :parameters (?part ?whole - assembly)
       :precondition (and (forall (?res - resource)
