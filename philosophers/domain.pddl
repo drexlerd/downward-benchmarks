@@ -5,9 +5,10 @@
 
 (define (domain protocol)
 
-(:requirements  :adl :derived-predicates
+(:requirements  :equality :derived-predicates :adl
  ;; equality needed for blocked transition in case of a mismatch
-)
+
+ :typing)
 (:types process proctype state queue transition
         number_ message
  ;; tags for size and messages
@@ -63,6 +64,12 @@
    (settled ?q - queue)
    ;; true if queue has completed restructuring
 
+   (blocked ?p - process)
+   ;; true if no local state transition is applicable
+
+   (blocked-trans ?p - process ?t - transition)
+   ;; true if process is blocked
+
    (queue-msg ?q - queue ?p - queue-state ?m - message)
    ;; true if queue cell is labelled with given message
 
@@ -100,13 +107,7 @@
    ;; true if number is not equal to maximum queue size
 
 )
-(:derived-predicates
-   (blocked ?p - process)
-   ;; true if no local state transition is applicable
 
-   (blocked-trans ?p - process ?t - transition)
-   ;; true if process is blocked
-)
 
 
    ;; transition that reads data from channel
@@ -146,7 +147,7 @@
 
 ;; determines if no local state transition can fire
 
-(:derived (blocked ?p)
+(:derived (blocked ?p - process)
    (and
      (exists (?s - state)
       (exists (?pt - proctype)
@@ -167,7 +168,7 @@
 
 ;; determines if a state transition cannot read, queue empty
 
-(:derived (blocked-trans ?p ?t)
+(:derived (blocked-trans ?p - process ?t - transition)
    (and
      (exists (?q - queue)
       (exists (?m - message)
@@ -184,7 +185,7 @@
 
 ;; determines if a state transition cannot write, queue full
 
-(:derived (blocked-trans ?p ?t)
+(:derived (blocked-trans ?p - process ?t - transition)
    (and
      (exists (?q - queue)
       (exists (?qt - queuetype)
@@ -204,7 +205,7 @@
 
 ;; determines if a state transition cannot read, wrong message
 
-(:derived (blocked-trans ?p ?t)
+(:derived (blocked-trans ?p - process ?t - transition)
      (and
         (exists (?q - queue)
         (exists (?m - message)
